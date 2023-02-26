@@ -18,4 +18,9 @@ export class ProductService {
   }
 
 
+  public getAllProducts(){
+    return this.httpClient.get<Product[]>(this.API+"/getAllProducts");
+  }
+
+
 }
