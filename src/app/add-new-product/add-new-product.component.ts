@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { FileHandle } from '../_model/file-handle.model';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_services/product.service';
@@ -12,9 +13,10 @@ import { ProductService } from '../_services/product.service';
 })
 export class AddNewProductComponent implements OnInit{
 
-constructor(private productservice:ProductService,private sanitizer:DomSanitizer){}
-
+constructor(private productservice:ProductService,private sanitizer:DomSanitizer,private activateRoute:ActivatedRoute){}
+isNewProduct=true;
 product:Product={
+  productId:0,
   productName:'',
   productDescription:'',
   productDiscountedPrice:0,
@@ -23,7 +25,10 @@ product:Product={
 }
 
   ngOnInit(): void {
-
+   this.product = this.activateRoute.snapshot.data['product']
+   if(this.product&&this.product.productId){
+    this.isNewProduct=false;
+   }
   }
 
   addProduct(productForm:NgForm){
@@ -45,7 +50,7 @@ product:Product={
 
     );
 
-    for(var i=0; i < product.productImages.length; i++){
+    for(let i=0; i < product.productImages.length; i++){
       formData.append(
         'imageFile',
         product.productImages[i].file,

@@ -5,6 +5,7 @@ import { Product } from '../_model/product.model';
 import { ImageprocessingService } from '../_services/imageprocessing.service';
 import { ProductService } from '../_services/product.service';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-product-details',
@@ -15,10 +16,11 @@ export class ShowProductDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['productId', 'productName', 'productDescription', 'productDiscountedPrice','productActualPrice','Images','Edit','Delete'];
   productDetails: Product[] = []
-  constructor(private productservice: ProductService,public dialog: MatDialog,private imageProcecessingService:ImageprocessingService) { }
+  constructor(private productservice: ProductService,public dialog: MatDialog,private imageProcecessingService:ImageprocessingService,private router:Router) { }
 
   ngOnInit(): void {
     this.getAllProducts();
+  
   }
 
   public getAllProducts() {
@@ -57,5 +59,9 @@ export class ShowProductDetailsComponent implements OnInit {
     });
     }
 
+
+    editProductDetails(productId:any){
+      this.router.navigate(['/AddNewProduct',{productId:productId}])
+    }
 
 }

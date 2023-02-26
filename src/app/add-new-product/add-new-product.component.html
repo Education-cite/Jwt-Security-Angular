@@ -28,7 +28,9 @@
                     </mat-form-field>
 
                     <div align="end">
-                        <button type="submit" class="btn btn-primary">Add AddNewProduct</button>&nbsp;
+                        <button type="submit" *ngIf="isNewProduct" class="btn btn-primary"> Add NewProduct</button>&nbsp;
+
+                        <button type="submit" *ngIf="!isNewProduct" class="btn btn-primary">Update NewProduct</button>&nbsp;
                         <button type="reset" class="btn btn-primary">Clear</button>
                     </div>
 
@@ -39,36 +41,34 @@
             <div class="col-6">
 
                 <div>
-                    <div class="dropzone"
-                    appDrag
-                    (files)="fileDropped($event)"
-                    >
+                    <div class="dropzone" appDrag (files)="fileDropped($event)">
                         <div class="text-wraper">
                             <div class="centered">
-                            Drag and Drop Your file or <a (click)="selectFile.click()" class="browse-button">browse</a> a file
+                                Drag and Drop Your file or <a (click)="selectFile.click()"
+                                    class="browse-button">browse</a> a file
+                            </div>
                         </div>
-                        </div>
-                    
+
                     </div>
 
                     <input type="file" multiple value="select" #selectFile (change)="onFileSelected($event)">
                 </div>
 
-            <div class="mt-5">
-                <div class="row">
-                <mat-grid-list cols="4" rowHeight="1:1">
-                    <mat-grid-tile *ngFor="let file of product.productImages; let i = index">
-                        <div style="position: relative">
-                            <span class="btn-remove-image" (click)="removeImages(i)">
-                                x
-                            </span>
-                             <img [src]="file.url" width="100px" height="100px" alt="picture"/>
-                        </div>
-                    </mat-grid-tile>
-                   
-                  </mat-grid-list>
-                </div>  
-            </div>
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="4" rowHeight="1:1">
+                            <mat-grid-tile *ngFor="let file of product.productImages; let i = index">
+                                <div style="position: relative">
+                                    <span class="btn-remove-image" (click)="removeImages(i)">
+                                        x
+                                    </span>
+                                    <img [src]="file.url" width="100px" height="100px" alt="picture" />
+                                </div>
+                            </mat-grid-tile>
+
+                        </mat-grid-list>
+                    </div>
+                </div>
 
             </div>
 

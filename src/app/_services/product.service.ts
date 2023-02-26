@@ -22,6 +22,11 @@ export class ProductService {
     return this.httpClient.get<Product[]>(this.API+"/getAllProducts");
   }
 
+  public getProductDetailsById(productId:any){
+    return this.httpClient.get<Product>(this.API+"/getProductDetailsById/"+productId);
+  }
+
+
 
   public deleteProduct(productId:number){
     return this.httpClient.delete(this.API+"/deleteProduct/"+productId);
