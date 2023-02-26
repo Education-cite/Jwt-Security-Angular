@@ -23,4 +23,9 @@ export class ProductService {
   }
 
 
+  public deleteProduct(productId:number){
+    return this.httpClient.delete(this.API+"/deleteProduct/"+productId);
+  }
+
+
 }

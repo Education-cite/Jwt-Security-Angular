@@ -9,7 +9,7 @@ import { ProductService } from '../_services/product.service';
 })
 export class ShowProductDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['productId', 'productName', 'productDescription', 'productDiscountedPrice','productActualPrice'];
+  displayedColumns: string[] = ['productId', 'productName', 'productDescription', 'productDiscountedPrice','productActualPrice','Edit','Delete'];
   productDetails: Product[] = []
   constructor(private productservice: ProductService) { }
 
@@ -27,7 +27,14 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
 
-
+    public deleteProduct(productId:any){
+      this.productservice.deleteProduct(productId).subscribe((data:any)=>{
+        alert("Product deleted successfully")
+        this.getAllProducts();
+      },(error)=>{
+        alert("loading data error!!")
+      });
+    }
 
 
 
